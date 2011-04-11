@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
 
+`git add -A;git commit -m "Updated"`
 `gitrb push origin master`
