@@ -1,36 +1,48 @@
 using System;
+using nothinbutdotnetprep.infrastructure;
 
 namespace nothinbutdotnetprep.collections
 {
-    public class Movie : IEquatable<Movie>
+    public class Movie
     {
         public string title { get; set; }
         public ProductionStudio production_studio { get; set; }
         public Genre genre { get; set; }
         public int rating { get; set; }
         public DateTime date_published { get; set; }
-        public bool Equals(Movie other)
+
+        public override string ToString()
         {
-            if(other == null) return false;
-
-
-            return ReferenceEquals(this,other) || is_equal_to_non_null_instance_of(other);
-
+            return title + ": " + date_published;
         }
 
-        bool is_equal_to_non_null_instance_of(Movie other)
+        public static Condition<Movie> is_in_genre(Genre genre)
         {
-            return this.title == other.title;
+            return new IsInGenre(genre).matches;
         }
 
-        public override bool Equals(object obj)
+        public static Criteria<Movie> is_not_published_by_pixar
         {
-            return Equals(obj as Movie);
+            get { return is_published_by(ProductionStudio.Pixar); }
         }
 
-        public override int GetHashCode()
+        public static Criteria<Movie> is_published_by(ProductionStudio studio)
         {
-            return title.GetHashCode();
+            return new IsPublishedBy(studio);
+        }
+
+        public static Criteria<Movie> is_published_by_pixar_or_disney
+        {
+            get
+            {
+                return is_published_by(ProductionStudio.Pixar)
+                    .or(is_published_by(ProductionStudio.Disney));
+            }
+        }
+
+        public static Criteria<Movie> is_published_by_pixar
+        {
+            get { return is_published_by(ProductionStudio.Pixar);}
         }
     }
 }
