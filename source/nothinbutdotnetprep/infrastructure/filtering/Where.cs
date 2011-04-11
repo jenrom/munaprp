@@ -11,9 +11,9 @@ namespace nothinbutdotnetprep.infrastructure.filtering
         }
 
         public static ComparableCriteriaFactory<ItemToMatch, PropertyType> has_an<PropertyType>(
-            PropertyAccessor<ItemToMatch, PropertyType> func) where PropertyType : IComparable<PropertyType>
+            PropertyAccessor<ItemToMatch, PropertyType> accessor) where PropertyType : IComparable<PropertyType>
         {
-            throw new NotImplementedException();
+            return new ComparableCriteriaFactory<ItemToMatch, PropertyType>(accessor);
         }
     }
 }
