@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+
 using nothinbutdotnetprep.collections;
 
 namespace nothinbutdotnetprep.infrastructure.filtering
@@ -12,7 +14,6 @@ namespace nothinbutdotnetprep.infrastructure.filtering
             this.accessor = accessor;
         }
 
-
         public Criteria<ItemToMatch> equal_to(PropertyType value)
         {
             return new AnonymousCriteria<ItemToMatch>(x => accessor(x).Equals(value));
@@ -20,7 +21,7 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 
         public Criteria<ItemToMatch> equal_to_any(params PropertyType[] values)
         {
-            throw new NotImplementedException();
+            return new AnonymousCriteria<ItemToMatch>(x => values.Contains(this.accessor(x)));
         }
     }
 }
