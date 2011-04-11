@@ -1,7 +1,4 @@
-using System;
-using System.Linq;
-
-using nothinbutdotnetprep.collections;
+using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.infrastructure.filtering
 {
@@ -16,12 +13,12 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 
         public Criteria<ItemToMatch> equal_to(PropertyType value)
         {
-            return new AnonymousCriteria<ItemToMatch>(x => accessor(x).Equals(value));
+            return equal_to_any(value);
         }
 
         public Criteria<ItemToMatch> equal_to_any(params PropertyType[] values)
         {
-            return new AnonymousCriteria<ItemToMatch>(x => values.Contains(this.accessor(x)));
+            return new AnonymousCriteria<ItemToMatch>(x => new List<PropertyType>(values).Contains(this.accessor(x)));
         }
     }
 }
