@@ -1,4 +1,6 @@
-﻿namespace nothinbutdotnetprep.infrastructure.filtering
+﻿using System;
+
+namespace nothinbutdotnetprep.infrastructure.filtering
 {
     public static class Where<ItemToMatch>
     {
@@ -6,6 +8,12 @@
             PropertyAccessor<ItemToMatch, PropertyType> accessor)
         {
             return new CriteriaFactory<ItemToMatch, PropertyType>(accessor);
+        }
+
+        public static ComparableCriteriaFactory<ItemToMatch, PropertyType> has_an<PropertyType>(
+            PropertyAccessor<ItemToMatch, PropertyType> func) where PropertyType : IComparable<PropertyType>
+        {
+            throw new NotImplementedException();
         }
     }
 }
