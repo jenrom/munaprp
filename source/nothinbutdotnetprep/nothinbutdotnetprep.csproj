@@ -68,6 +68,7 @@
     <Compile Include="infrastructure\filtering\AnonymousCriteria.cs" />
     <Compile Include="infrastructure\filtering\Condition.cs" />
     <Compile Include="infrastructure\filtering\Criteria.cs" />
+    <Compile Include="infrastructure\filtering\CriteriaBuilder.cs" />
     <Compile Include="infrastructure\filtering\CriteriaExtensions.cs" />
     <Compile Include="infrastructure\EnumerableExtensions.cs" />
     <Compile Include="infrastructure\filtering\OrCriteria.cs" />

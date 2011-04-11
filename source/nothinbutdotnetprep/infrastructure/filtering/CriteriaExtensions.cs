@@ -9,10 +9,5 @@ namespace nothinbutdotnetprep.infrastructure.filtering
         {
             return new OrCriteria<ItemToMatch>(left, rigth);     
         }
-
-        public static Criteria<ItemToMatch> equal_to<ItemToMatch,PropertyType>(this PropertyAccessor<ItemToMatch,PropertyType> accessor, PropertyType value)
-        {
-            return new AnonymousCriteria<ItemToMatch>(x => accessor(x).Equals(value)); 
-        }
     }
 }

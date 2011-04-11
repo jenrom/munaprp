@@ -2,10 +2,10 @@
 {
     public static class Where<ItemToMatch>
     {
-        public static PropertyAccessor<ItemToMatch, PropertyType> has_a<PropertyType>(
+        public static CriteriaBuilder<ItemToMatch, PropertyType> has_a<PropertyType>(
             PropertyAccessor<ItemToMatch, PropertyType> accessor)
         {
-            return accessor;
+            return CriteriaBuilder<ItemToMatch, PropertyType>.Create(accessor);
         }
     }
 }
