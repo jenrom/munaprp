@@ -71,6 +71,7 @@
     <Compile Include="infrastructure\CriteriaExtensions.cs" />
     <Compile Include="infrastructure\EnumerableExtensions.cs" />
     <Compile Include="infrastructure\OrCriteria.cs" />
+    <Compile Include="infrastructure\Where.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
