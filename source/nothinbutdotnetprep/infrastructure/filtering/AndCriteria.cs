@@ -2,8 +2,8 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 {
     public class AndCriteria<ItemToMatch> : Criteria<ItemToMatch>
     {
-        Criteria<ItemToMatch> left_side;
-        Criteria<ItemToMatch> right_side;
+        readonly Criteria<ItemToMatch> left_side;
+        readonly Criteria<ItemToMatch> right_side;
 
         public AndCriteria(Criteria<ItemToMatch> left_side, Criteria<ItemToMatch> right_side)
         {

@@ -2,7 +2,7 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 {
     public class AnonymousCriteria<ItemToMatch> : Criteria<ItemToMatch>
     {
-        Condition<ItemToMatch> condition;
+        readonly Condition<ItemToMatch> condition;
 
         public AnonymousCriteria(Condition<ItemToMatch> condition)
         {

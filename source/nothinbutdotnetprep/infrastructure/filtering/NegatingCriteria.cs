@@ -2,7 +2,7 @@
 {
     public class NegatingCriteria<ItemToMatch> : Criteria<ItemToMatch>
     {
-        Criteria<ItemToMatch> criteria;
+        readonly Criteria<ItemToMatch> criteria;
 
         public NegatingCriteria(Criteria<ItemToMatch> criteria)
         {

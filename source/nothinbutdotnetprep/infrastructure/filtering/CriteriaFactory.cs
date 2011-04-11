@@ -5,7 +5,7 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 {
     public class CriteriaFactory<ItemToMatch, PropertyType> 
     {
-        PropertyAccessor<ItemToMatch, PropertyType> accessor;
+        readonly PropertyAccessor<ItemToMatch, PropertyType> accessor;
 
         public CriteriaFactory(PropertyAccessor<ItemToMatch, PropertyType> accessor)
         {
