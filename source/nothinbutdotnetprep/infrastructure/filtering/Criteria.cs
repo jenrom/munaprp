@@ -1,4 +1,4 @@
-﻿namespace nothinbutdotnetprep.infrastructure
+﻿namespace nothinbutdotnetprep.infrastructure.filtering
 {
     public interface Criteria<in ItemToMatch>
     {

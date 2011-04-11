@@ -4,6 +4,7 @@ using developwithpassion.specifications.extensions;
 using developwithpassion.specifications.moq;
 using Machine.Specifications;
 using nothinbutdotnetprep.collections;
+using nothinbutdotnetprep.infrastructure.filtering;
 using nothinbutdotnetprep.tests.utility;
 using System.Linq;
 using nothinbutdotnetprep.infrastructure;
@@ -197,8 +198,8 @@ namespace nothinbutdotnetprep.specs
             It should_be_able_to_find_all_movies_published_by_pixar = () =>
             {
                 var criteria = 
-                    Where<Movie>.has_a(x => x.production_studio)
-                    .equal_to(ProductionStudio.Pixar);
+                    Where<Movie>.has_a(x => x.rating)
+                    .equal_to(2);
 
                 var results =
                     sut.all_movies().all_items_matching(criteria);

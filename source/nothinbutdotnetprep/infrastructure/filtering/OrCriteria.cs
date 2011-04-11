@@ -1,6 +1,4 @@
-using System;
-
-namespace nothinbutdotnetprep.infrastructure
+namespace nothinbutdotnetprep.infrastructure.filtering
 {
     public class OrCriteria<ItemToMatch> : Criteria<ItemToMatch>
     {
