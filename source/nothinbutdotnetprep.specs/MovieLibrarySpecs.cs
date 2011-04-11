@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using developwithpassion.specifications.extensions;
 using developwithpassion.specifications.moq;
 using Machine.Specifications;
 using nothinbutdotnetprep.collections;
+using nothinbutdotnetprep.infrastructure;
 using nothinbutdotnetprep.infrastructure.filtering;
 using nothinbutdotnetprep.tests.utility;
-using System.Linq;
-using nothinbutdotnetprep.infrastructure;
 
 /* The following set of Context/Specification pairs are in place to specify the functionality that you need to complete for the MovieLibrary class.
  * MovieLibrary is an aggregate root for the Movie class. it exposes the ability to search,sort, and iterate over all of the movies that it aggregates.
@@ -197,20 +197,23 @@ namespace nothinbutdotnetprep.specs
 
             It should_be_able_to_find_all_movies_published_by_pixar = () =>
             {
-                var criteria = 
+                var criteria =
                     Where<Movie>.has_a(x => x.production_studio)
-                    .equal_to(ProductionStudio.Pixar);
+                        .equal_to(ProductionStudio.Pixar);
 
                 var results =
                     sut.all_movies().all_items_matching(criteria);
-
 
                 results.ShouldContainOnly(cars, a_bugs_life);
             };
 
             It should_be_able_to_find_all_movies_published_by_pixar_or_disney = () =>
             {
-                var results = sut.all_movies_published_by_pixar_or_disney();
+                var criteria =
+                    Where<Movie>.has_a(x => x.production_studio)
+                        .equal_to_any(ProductionStudio.Pixar, ProductionStudio.Disney);
+
+                var results = sut.all_movies().all_items_matching(criteria);
 
                 results.ShouldContainOnly(a_bugs_life, pirates_of_the_carribean, cars);
             };

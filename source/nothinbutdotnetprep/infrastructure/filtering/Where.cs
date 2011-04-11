@@ -5,7 +5,7 @@
         public static CriteriaBuilder<ItemToMatch, PropertyType> has_a<PropertyType>(
             PropertyAccessor<ItemToMatch, PropertyType> accessor)
         {
-            return CriteriaBuilder<ItemToMatch, PropertyType>.Create(accessor);
+            return new CriteriaBuilder<ItemToMatch, PropertyType>(accessor);
         }
     }
 }
