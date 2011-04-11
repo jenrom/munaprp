@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using nothinbutdotnetprep.collections;
 
 namespace nothinbutdotnetprep.infrastructure.filtering
 {
-    public class CriteriaFactory<ItemToMatch, PropertyType>
+    public class CriteriaFactory<ItemToMatch, PropertyType> 
     {
         PropertyAccessor<ItemToMatch, PropertyType> accessor;
 
@@ -25,7 +24,7 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 
         public Criteria<ItemToMatch> not_equal_to(PropertyType value)
         {
-            throw new NotImplementedException();
+            return new NegatingCriteria<ItemToMatch>(equal_to(value));
         }
     }
 }
