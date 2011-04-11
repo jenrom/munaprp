@@ -69,6 +69,21 @@ namespace nothinbutdotnetprep.specs
                 depends.on(movie_collection);
             };
         } ;
+        public class when_iterating: movie_library_concern
+        {
+            static IEnumerable<Movie> results;
+
+            Establish c = () =>
+                movie_collection.add_all(new Movie(), new Movie());
+
+            Because b = () =>
+                results = sut.all_movies();
+
+            It should_iterate = () =>
+            {
+                results.Count();
+            };
+        }
 
         [Subject(typeof(MovieLibrary))]
         public class when_counting_the_number_of_movies : movie_library_concern
@@ -108,6 +123,7 @@ namespace nothinbutdotnetprep.specs
             It should_receive_a_set_containing_each_movie_in_the_library = () =>
                 all_movies.ShouldContainOnly(first_movie, second_movie);
         }
+
 
         [Subject(typeof(MovieLibrary))]
         public class when_trying_to_change_the_set_of_movies_returned_by_the_movie_library_to_a_mutable_type :
