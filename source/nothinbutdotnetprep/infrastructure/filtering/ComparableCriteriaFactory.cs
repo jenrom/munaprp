@@ -5,12 +5,10 @@ namespace nothinbutdotnetprep.infrastructure.filtering
     public class ComparableCriteriaFactory<ItemToMatch, PropertyType>  : ICreateSpecifications<ItemToMatch,PropertyType>
         where PropertyType : IComparable<PropertyType>
     {
-        PropertyAccessor<ItemToMatch, PropertyType> accessor;
         ICreateSpecifications<ItemToMatch, PropertyType> factory;
 
-        public ComparableCriteriaFactory(PropertyAccessor<ItemToMatch, PropertyType> accessor, ICreateSpecifications<ItemToMatch, PropertyType> factory)
+        public ComparableCriteriaFactory(ICreateSpecifications<ItemToMatch, PropertyType> factory)
         {
-            this.accessor = accessor;
             this.factory = factory;
         }
 
@@ -34,14 +32,14 @@ namespace nothinbutdotnetprep.infrastructure.filtering
             return factory.matches(condition);
         }
 
-        public Criteria<ItemToMatch> greater_than_or_equal_to(PropertyType start)
+        public Criteria<ItemToMatch> greater_than_or_equal_to(PropertyType value)
         {
-            return Where<ItemToMatch>.has_a(accessor).equal_to(start).or(greater_than(start));
+            return matches(x => x.CompareTo(value) >= 0);
         }
 
-        public Criteria<ItemToMatch> less_than_or_equal_to(PropertyType end)
+        public Criteria<ItemToMatch> less_than_or_equal_to(PropertyType value)
         {
-            return matches(x => x.CompareTo(end) <= 0);
+            return matches(x => x.CompareTo(value) <= 0);
         }
 
         public Criteria<ItemToMatch> between(PropertyType start, PropertyType end)
