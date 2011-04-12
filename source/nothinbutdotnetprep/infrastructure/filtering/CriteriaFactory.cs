@@ -4,11 +4,13 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 {
     public class CriteriaFactory<ItemToMatch, PropertyType> : ICreateSpecifications<ItemToMatch, PropertyType>
     {
-        readonly PropertyAccessor<ItemToMatch, PropertyType> accessor;
+        PropertyAccessor<ItemToMatch, PropertyType> accessor;
+        public NegatingCriteriaFactory<ItemToMatch, PropertyType> not;
 
         public CriteriaFactory(PropertyAccessor<ItemToMatch, PropertyType> accessor)
         {
             this.accessor = accessor;
+            this.not = new NegatingCriteriaFactory<ItemToMatch, PropertyType>(this);
         }
 
         public Criteria<ItemToMatch> equal_to(PropertyType value)
