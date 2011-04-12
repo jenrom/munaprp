@@ -23,11 +23,6 @@ namespace nothinbutdotnetprep.infrastructure.filtering
             return factory.equal_to_any(values);
         }
 
-        public Criteria<ItemToMatch> not_equal_to(PropertyType value)
-        {
-            return factory.not_equal_to(value);
-        }
-
         public Criteria<ItemToMatch> matches(Criteria<PropertyType> condition)
         {
             return factory.matches(condition);

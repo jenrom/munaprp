@@ -1,14 +1,32 @@
+using System;
 using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.infrastructure.filtering
 {
     public class CriteriaFactory<ItemToMatch, PropertyType> : ICreateSpecifications<ItemToMatch, PropertyType>
     {
-        readonly PropertyAccessor<ItemToMatch, PropertyType> accessor;
+        private readonly PropertyAccessor<ItemToMatch, PropertyType> accessor;
+        private bool isNegating;
 
         public CriteriaFactory(PropertyAccessor<ItemToMatch, PropertyType> accessor)
         {
             this.accessor = accessor;
+        }
+
+        public ICreateSpecifications<ItemToMatch, PropertyType> not
+        {
+            get
+            {
+                return new NegationConditionFactory<ItemToMatch, PropertyType>(this);
+
+                if(isNegating)
+                {
+                    throw new InvalidOperationException("Not is not allowed to be called twice");
+                }
+
+                this.isNegating = true;
+                return this;
+            }
         }
 
         public Criteria<ItemToMatch> equal_to(PropertyType value)
@@ -16,20 +34,24 @@ namespace nothinbutdotnetprep.infrastructure.filtering
             return equal_to_any(value);
         }
 
-        public Criteria<ItemToMatch> equal_to_any(params PropertyType[] values)
+        private Criteria<ItemToMatch> chain(Criteria<ItemToMatch> criteria_to_chain)
         {
-            return matches(new EqualToAny<PropertyType>(values));
+            if(isNegating)
+            {
+                criteria_to_chain = new NegatingCriteria<ItemToMatch>(criteria_to_chain);
+            }
+
+            return criteria_to_chain;
         }
 
-        public Criteria<ItemToMatch> not_equal_to(PropertyType value)
+        public Criteria<ItemToMatch> equal_to_any(params PropertyType[] values)
         {
-            return new NegatingCriteria<ItemToMatch>(equal_to(value));
+            return chain(matches(new EqualToAny<PropertyType>(values)));
         }
 
         public Criteria<ItemToMatch> matches(Criteria<PropertyType> criteria)
         {
-            return new PropertyCriteria<ItemToMatch, PropertyType>(criteria,
-                                                                   accessor);
+            return chain(new PropertyCriteria<ItemToMatch, PropertyType>(criteria, accessor));
         }
     }
 }
