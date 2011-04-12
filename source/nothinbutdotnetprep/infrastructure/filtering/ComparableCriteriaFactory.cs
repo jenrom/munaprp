@@ -29,7 +29,7 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 
         public Criteria<ItemToMatch> greater_than(PropertyType value)
         {
-            throw new NotImplementedException();
+            return new AnonymousCriteria<ItemToMatch>(x => accessor(x).CompareTo(value) > 0);
         }
     }
 }
