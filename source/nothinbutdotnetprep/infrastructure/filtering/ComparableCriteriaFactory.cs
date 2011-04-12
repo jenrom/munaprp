@@ -1,5 +1,6 @@
 using System;
 using nothinbutdotnetprep.infrastructure.ranges;
+using nothinbutdotnetprep.infrastructure.filtering;
 
 namespace nothinbutdotnetprep.infrastructure.filtering
 {
@@ -35,12 +36,14 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 
         public Criteria<ItemToMatch> greater_than_or_equal_to(PropertyType value)
         {
-            return matches(new FallsInRange<PropertyType>(new RangeWithNoUpperBound<PropertyType>(value)));
+            return matches(new FallsInRange<PropertyType>(new RangeWithNoUpperBound<PropertyType>(value))
+                .or(new EqualToAny<PropertyType>(value)));
         }
 
         public Criteria<ItemToMatch> less_than_or_equal_to(PropertyType value)
         {
-            return matches(null);
+            return matches(new FallsInRange<PropertyType>(new RangeWithNoLowerBound<PropertyType>(value))
+                .or(new EqualToAny<PropertyType>(value)));
         }
 
         public Criteria<ItemToMatch> between(PropertyType start, PropertyType end)
@@ -50,7 +53,7 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 
         public Criteria<ItemToMatch> greater_than(PropertyType value)
         {
-            return matches(null);
+            return matches(new FallsInRange<PropertyType>(new RangeWithNoUpperBound<PropertyType>(value)));
         }
     }
 }
