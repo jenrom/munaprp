@@ -83,6 +83,7 @@
     <Compile Include="infrastructure\filtering\PropertyCriteria.cs" />
     <Compile Include="infrastructure\filtering\Where.cs" />
     <Compile Include="infrastructure\ranges\Range.cs" />
+    <Compile Include="infrastructure\ranges\RangeWithNoLowerBound.cs" />
     <Compile Include="infrastructure\ranges\RangeWithNoUpperBound.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,18 +2,18 @@ using System;
 
 namespace nothinbutdotnetprep.infrastructure.ranges
 {
-    public class RangeWithNoUpperBound<T> : Range<T> where T : IComparable<T>
+    public class RangeWithNoLowerBound<T> : Range<T> where T : IComparable<T>
     {
-        T start;
-
-        public RangeWithNoUpperBound(T start)
+        public RangeWithNoLowerBound(T start)
         {
             this.start = start;
         }
 
+        T start;
+
         public bool contains(T value)
         {
-            return value.CompareTo(start) > 0;
+            return value.CompareTo(start) < 0;
         }
     }
 }
