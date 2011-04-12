@@ -4,11 +4,12 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 {
     public class CriteriaFactory<ItemToMatch, PropertyType> : ICreateSpecifications<ItemToMatch, PropertyType>
     {
-        readonly PropertyAccessor<ItemToMatch, PropertyType> accessor;
+        private IPropertyConditionCriteriaFactory<ItemToMatch, PropertyType> propertyConditionCritieriaFactory;
 
-        public CriteriaFactory(PropertyAccessor<ItemToMatch, PropertyType> accessor)
+
+        public CriteriaFactory(IPropertyConditionCriteriaFactory<ItemToMatch, PropertyType> propertyConditionCritieriaFactory)
         {
-            this.accessor = accessor;
+            this.propertyConditionCritieriaFactory = propertyConditionCritieriaFactory;
         }
 
         public Criteria<ItemToMatch> equal_to(PropertyType value)
@@ -18,17 +19,12 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 
         public Criteria<ItemToMatch> equal_to_any(params PropertyType[] values)
         {
-            return matches(x => new List<PropertyType>(values).Contains(this.accessor(x)));
+            return propertyConditionCritieriaFactory.create_for(x => new List<PropertyType>(values).Contains(x));
         }
 
         public Criteria<ItemToMatch> not_equal_to(PropertyType value)
         {
             return new NegatingCriteria<ItemToMatch>(equal_to(value));
-        }
-
-        public Criteria<ItemToMatch> matches(Condition<ItemToMatch> condition)
-        {
-            return new AnonymousCriteria<ItemToMatch>(condition);
         }
     }
 }
