@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using nothinbutdotnetprep.infrastructure;
 
 namespace nothinbutdotnetprep.collections
 {
@@ -14,35 +15,24 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_movies()
         {
-            foreach (var movie in movies)
-                yield return movie;
+            return movies.one_at_a_time();
         }
-
 
         public void add(Movie movie)
         {
-            foreach (var movieInList in movies) 
-                if (movieInList.title == movie.title)
-                    return;
+            if (already_contains(movie)) return;
 
             movies.Add(movie);
+        }
+
+        bool already_contains(Movie movie)
+        {
+            return movies.Contains(movie);
         }
 
         public IEnumerable<Movie> sort_all_movies_by_title_descending
         {
             get { throw new NotImplementedException(); }
-        }
-
-        public IEnumerable<Movie> all_movies_published_by_pixar()
-        {
-            return Find(m => m.production_studio == ProductionStudio.Pixar);
-        }
-
-        public IEnumerable<Movie> all_movies_published_by_pixar_or_disney()
-        {
-            return
-                Find(
-                    m => m.production_studio == ProductionStudio.Pixar || m.production_studio == ProductionStudio.Disney);
         }
 
         public IEnumerable<Movie> sort_all_movies_by_title_ascending
@@ -53,31 +43,6 @@ namespace nothinbutdotnetprep.collections
         public IEnumerable<Movie> sort_all_movies_by_movie_studio_and_year_published()
         {
             throw new NotImplementedException();
-        }
-
-        public IEnumerable<Movie> all_movies_not_published_by_pixar()
-        {
-            return Find(m => m.production_studio != ProductionStudio.Pixar);
-        }
-
-        public IEnumerable<Movie> all_movies_published_after(int year)
-        {
-            return Find(m => m.date_published.Year > year);
-        }
-
-        public IEnumerable<Movie> all_movies_published_between_years(int startingYear, int endingYear)
-        {
-            return Find(m => m.date_published.Year >= startingYear && m.date_published.Year <= endingYear);
-        }
-
-        public IEnumerable<Movie> all_kid_movies()
-        {
-            return Find(m => m.genre == Genre.kids);
-        }
-
-        public IEnumerable<Movie> all_action_movies()
-        {
-            return Find(m => m.genre == Genre.action);
         }
 
         public IEnumerable<Movie> sort_all_movies_by_date_published_descending()
@@ -92,17 +57,10 @@ namespace nothinbutdotnetprep.collections
 
         IEnumerable<Movie> Sorted(Comparison<Movie> comparer)
         {
-            Movie[] sorted = new Movie[movies.Count];
+            var sorted = new Movie[movies.Count];
             movies.CopyTo(sorted, 0);
             Array.Sort(sorted, comparer);
             return sorted;
-        }
-
-        IEnumerable<Movie> Find(Func<Movie,bool> pred)
-        {
-            foreach (var movie in movies)
-                if (pred(movie))
-                    yield return movie;
         }
     }
 }

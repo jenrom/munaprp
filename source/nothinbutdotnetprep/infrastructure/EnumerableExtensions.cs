@@ -5,6 +5,11 @@ namespace nothinbutdotnetprep.infrastructure
 {
     public static class EnumerableExtensions
     {
+        public static IEnumerable<T> one_at_a_time<T>(this IEnumerable<T> items)
+        {
+            foreach (var item in items) yield return item;
+        }
+
         public static IEnumerable<ItemToMatch> all_items_matching<ItemToMatch>(this IEnumerable<ItemToMatch> items,
                                                                                Criteria<ItemToMatch> criteria)
         {
@@ -12,7 +17,7 @@ namespace nothinbutdotnetprep.infrastructure
         }
 
         static IEnumerable<ItemToMatch> all_items_matching<ItemToMatch>(this IEnumerable<ItemToMatch> items,
-                                                                               Condition<ItemToMatch> criteria)
+                                                                        Condition<ItemToMatch> criteria)
         {
             foreach (var item_to_match in items)
             {

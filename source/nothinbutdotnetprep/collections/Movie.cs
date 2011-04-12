@@ -1,12 +1,11 @@
 using System;
-using nothinbutdotnetprep.infrastructure;
-using nothinbutdotnetprep.infrastructure.filtering;
 
 namespace nothinbutdotnetprep.collections
 {
-    public class Movie
+    public class Movie : IEquatable<Movie>
     {
         public string title { get; set; }
+
         public ProductionStudio production_studio { get; set; }
         public Genre genre { get; set; }
         public int rating { get; set; }
@@ -17,33 +16,21 @@ namespace nothinbutdotnetprep.collections
             return title + ": " + date_published;
         }
 
-        public static Condition<Movie> is_in_genre(Genre genre)
+        public override int GetHashCode()
         {
-            return new IsInGenre(genre).matches;
+            return title.GetHashCode();
         }
 
-        public static Criteria<Movie> is_not_published_by_pixar
+        public override bool Equals(object obj)
         {
-            get { return is_published_by(ProductionStudio.Pixar); }
+            return Equals(obj as Movie);
         }
 
-        public static Criteria<Movie> is_published_by(ProductionStudio studio)
+        public bool Equals(Movie other)
         {
-            return new IsPublishedBy(studio);
-        }
+            if (other == null) return false;
 
-        public static Criteria<Movie> is_published_by_pixar_or_disney
-        {
-            get
-            {
-                return is_published_by(ProductionStudio.Pixar)
-                    .or(is_published_by(ProductionStudio.Disney));
-            }
-        }
-
-        public static Criteria<Movie> is_published_by_pixar
-        {
-            get { return is_published_by(ProductionStudio.Pixar);}
+            return ReferenceEquals(this, other) || this.title == other.title;
         }
     }
 }
