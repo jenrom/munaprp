@@ -14,7 +14,7 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 
         public Criteria<ItemToMatch> greater_than_or_equal_to(PropertyType start)
         {
-            return new AnonymousCriteria<ItemToMatch>(x => accessor(x).CompareTo(start) >= 0);
+            return Where<ItemToMatch>.has_a(accessor).equal_to(start).or(greater_than(start));
         }
 
         public Criteria<ItemToMatch> less_than_or_equal_to(PropertyType end)
