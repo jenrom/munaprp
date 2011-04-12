@@ -281,8 +281,12 @@ namespace nothinbutdotnetprep.specs
              * without the need for using explicit methods. For this exercise, no linq queries are allowed!!. */
 
             It should_be_able_to_sort_all_movies_by_title_descending = () =>
-            {
-                var comparer = //Use the dsl
+                                                                           {
+                var comparer =
+                    Sort<Movie>.By(x => x.title).Descending()
+                    .By(x => x.production_studio).Descending()
+                    .By(x => x.date_published).Ascending();
+
                 var results = sut.sort_all_movies_by_title_descending;
 
                 results.ShouldContainOnlyInOrder(theres_something_about_mary, the_ring, shrek,
