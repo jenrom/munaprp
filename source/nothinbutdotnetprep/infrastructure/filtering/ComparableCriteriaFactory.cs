@@ -1,11 +1,10 @@
 using System;
-using nothinbutdotnetprep.collections;
 
 namespace nothinbutdotnetprep.infrastructure.filtering
 {
     public class ComparableCriteriaFactory<ItemToMatch, PropertyType> where PropertyType : IComparable<PropertyType>
     {
-        private readonly PropertyAccessor<ItemToMatch, PropertyType> accessor;
+        readonly PropertyAccessor<ItemToMatch, PropertyType> accessor;
 
         public ComparableCriteriaFactory(PropertyAccessor<ItemToMatch, PropertyType> accessor)
         {
