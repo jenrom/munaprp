@@ -10,9 +10,9 @@
             this.original = original;
         }
 
-        public Criteria<ItemToFilter> create_from(Criteria<PropertyType> criteria)
+        public Criteria<ItemToFilter> create_criteria_from(Criteria<PropertyType> criteria)
         {
-            return new NegatingCriteria<ItemToFilter>(original.create_from(criteria));
+            return new NegatingCriteria<ItemToFilter>(original.create_criteria_from(criteria));
         }
     }
 }

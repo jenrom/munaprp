@@ -2,7 +2,7 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 {
     public interface IProvideAccessToSpecificationFactories<ItemToFilter, PropertyType>
     {
-        Criteria<ItemToFilter> create_from(Criteria<PropertyType> criteria);
+        Criteria<ItemToFilter> create_criteria_from(Criteria<PropertyType> criteria);
     }
 
     public class FilteringExtensionPoint<ItemToFilter, PropertyType> :
@@ -20,7 +20,7 @@ namespace nothinbutdotnetprep.infrastructure.filtering
             get { return new NegatingExtensionPoint<ItemToFilter, PropertyType>(this); }
         }
 
-        public Criteria<ItemToFilter> create_from(Criteria<PropertyType> criteria)
+        public Criteria<ItemToFilter> create_criteria_from(Criteria<PropertyType> criteria)
         {
             return new PropertyCriteria<ItemToFilter, PropertyType>(criteria, accessor);
         }
