@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace nothinbutdotnetprep.infrastructure.filtering
+﻿namespace nothinbutdotnetprep.infrastructure.filtering
 {
     public class NegatingCriteriaFactory<ItemToMatch, PropertyType> : ICreateSpecifications<ItemToMatch, PropertyType>
     {
@@ -24,20 +19,15 @@ namespace nothinbutdotnetprep.infrastructure.filtering
             return negate(factory.equal_to_any(values));
         }
 
-        public Criteria<ItemToMatch> not_equal_to(PropertyType value)
-        {
-            return negate(factory.not_equal_to(value));
-        }
 
         public Criteria<ItemToMatch> matches(Criteria<PropertyType> itemToMatch)
         {
             return negate(factory.matches(itemToMatch));
         }
 
-        private static Criteria<ItemToMatch> negate(Criteria<ItemToMatch> criteria)
+        static Criteria<ItemToMatch> negate(Criteria<ItemToMatch> criteria)
         {
             return new NegatingCriteria<ItemToMatch>(criteria);
         }
-
     }
 }

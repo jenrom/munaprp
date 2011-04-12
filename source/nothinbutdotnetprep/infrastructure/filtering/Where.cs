@@ -10,6 +10,12 @@ namespace nothinbutdotnetprep.infrastructure.filtering
             return new CriteriaFactory<ItemToMatch, PropertyType>(accessor);
         }
 
+        public static FilteringExtensionPoint<ItemToMatch, PropertyType> has_the<PropertyType>(
+            PropertyAccessor<ItemToMatch, PropertyType> accessor) 
+        {
+            return new FilteringExtensionPoint<ItemToMatch,PropertyType>(accessor);
+        }
+
         public static ComparableCriteriaFactory<ItemToMatch, PropertyType> has_an<PropertyType>(
             PropertyAccessor<ItemToMatch, PropertyType> accessor) where PropertyType : IComparable<PropertyType>
         {
