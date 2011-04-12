@@ -1,4 +1,5 @@
 using System;
+using nothinbutdotnetprep.collections;
 
 namespace nothinbutdotnetprep.infrastructure.filtering
 {
@@ -11,19 +12,24 @@ namespace nothinbutdotnetprep.infrastructure.filtering
             this.accessor = accessor;
         }
 
-        public Criteria<ItemToMatch> greater_than(PropertyType start)
+        public Criteria<ItemToMatch> greater_than_or_equal_to(PropertyType start)
         {
             return new AnonymousCriteria<ItemToMatch>(x => accessor(x).CompareTo(start) >= 0);
         }
 
-        public Criteria<ItemToMatch> less_than(PropertyType end)
+        public Criteria<ItemToMatch> less_than_or_equal_to(PropertyType end)
         {
             return new AnonymousCriteria<ItemToMatch>(x => accessor(x).CompareTo(end) <= 0);
         }
 
         public Criteria<ItemToMatch> between(PropertyType start, PropertyType end)
         {
-            return new AndCriteria<ItemToMatch>(greater_than(start), less_than(end));
+            return greater_than_or_equal_to(start).and(less_than_or_equal_to(end));
+        }
+
+        public Criteria<ItemToMatch> greater_than(PropertyType value)
+        {
+            throw new NotImplementedException();
         }
     }
 }
