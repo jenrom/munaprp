@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.infrastructure.filtering
 {
@@ -9,6 +10,26 @@ namespace nothinbutdotnetprep.infrastructure.filtering
         public ComparableCriteriaFactory(PropertyAccessor<ItemToMatch, PropertyType> accessor)
         {
             this.accessor = accessor;
+        }
+
+        public Criteria<ItemToMatch> equal_to(PropertyType value)
+        {
+            return this.CreateFactory().equal_to(value);
+        }
+
+        public Criteria<ItemToMatch> equal_to_any(params PropertyType[] values)
+        {
+            return this.CreateFactory().equal_to_any(values);
+        }
+
+        public Criteria<ItemToMatch> not_equal_to(PropertyType value)
+        {
+            return this.CreateFactory().not_equal_to(value);
+        }
+
+        private CriteriaFactory<ItemToMatch, PropertyType> CreateFactory()
+        {
+            return new CriteriaFactory<ItemToMatch, PropertyType>(this.accessor);
         }
 
         public Criteria<ItemToMatch> greater_than_or_equal_to(PropertyType start)
