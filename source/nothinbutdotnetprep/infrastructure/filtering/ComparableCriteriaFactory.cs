@@ -29,7 +29,7 @@ namespace nothinbutdotnetprep.infrastructure.filtering
             return factory.not_equal_to(value);
         }
 
-        public Criteria<ItemToMatch> matches(Condition<ItemToMatch> condition)
+        public Criteria<ItemToMatch> matches(Condition<PropertyType> condition)
         {
             return factory.matches(condition);
         }
@@ -41,7 +41,7 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 
         public Criteria<ItemToMatch> less_than_or_equal_to(PropertyType end)
         {
-            return matches(x => accessor(x).CompareTo(end) <= 0);
+            return matches(x => x.CompareTo(end) <= 0);
         }
 
         public Criteria<ItemToMatch> between(PropertyType start, PropertyType end)
@@ -51,7 +51,7 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 
         public Criteria<ItemToMatch> greater_than(PropertyType value)
         {
-            return matches(x => accessor(x).CompareTo(value) > 0);
+            return matches(x => x.CompareTo(value) > 0);
         }
     }
 }

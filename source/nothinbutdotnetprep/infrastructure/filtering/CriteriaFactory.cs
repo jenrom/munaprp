@@ -18,7 +18,7 @@ namespace nothinbutdotnetprep.infrastructure.filtering
 
         public Criteria<ItemToMatch> equal_to_any(params PropertyType[] values)
         {
-            return matches(x => new List<PropertyType>(values).Contains(this.accessor(x)));
+            return matches(x => new List<PropertyType>(values).Contains(x));
         }
 
         public Criteria<ItemToMatch> not_equal_to(PropertyType value)
@@ -26,9 +26,9 @@ namespace nothinbutdotnetprep.infrastructure.filtering
             return new NegatingCriteria<ItemToMatch>(equal_to(value));
         }
 
-        public Criteria<ItemToMatch> matches(Condition<ItemToMatch> condition)
+        public Criteria<ItemToMatch> matches(Condition<PropertyType> condition)
         {
-            return new AnonymousCriteria<ItemToMatch>(condition);
+            return new AnonymousCriteria<ItemToMatch>(x => condition(accessor(x)));
         }
     }
 }
