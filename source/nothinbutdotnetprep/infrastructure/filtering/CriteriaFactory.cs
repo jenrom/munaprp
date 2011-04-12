@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.infrastructure.filtering
 {
-    public class CriteriaFactory<ItemToMatch, PropertyType>
+    public class CriteriaFactory<ItemToMatch, PropertyType> : ICreateSpecifications<ItemToMatch, PropertyType>
     {
         readonly PropertyAccessor<ItemToMatch, PropertyType> accessor;
 

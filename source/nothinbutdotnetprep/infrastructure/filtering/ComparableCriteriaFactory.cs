@@ -1,35 +1,32 @@
 using System;
-using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.infrastructure.filtering
 {
-    public class ComparableCriteriaFactory<ItemToMatch, PropertyType> where PropertyType : IComparable<PropertyType>
+    public class ComparableCriteriaFactory<ItemToMatch, PropertyType>  : ICreateSpecifications<ItemToMatch,PropertyType>
+        where PropertyType : IComparable<PropertyType>
     {
-        readonly PropertyAccessor<ItemToMatch, PropertyType> accessor;
+        PropertyAccessor<ItemToMatch, PropertyType> accessor;
+        ICreateSpecifications<ItemToMatch, PropertyType> factory;
 
-        public ComparableCriteriaFactory(PropertyAccessor<ItemToMatch, PropertyType> accessor)
+        public ComparableCriteriaFactory(PropertyAccessor<ItemToMatch, PropertyType> accessor, ICreateSpecifications<ItemToMatch, PropertyType> factory)
         {
             this.accessor = accessor;
+            this.factory = factory;
         }
 
         public Criteria<ItemToMatch> equal_to(PropertyType value)
         {
-            return this.CreateFactory().equal_to(value);
+            return factory.equal_to(value);
         }
 
         public Criteria<ItemToMatch> equal_to_any(params PropertyType[] values)
         {
-            return this.CreateFactory().equal_to_any(values);
+            return factory.equal_to_any(values);
         }
 
         public Criteria<ItemToMatch> not_equal_to(PropertyType value)
         {
-            return this.CreateFactory().not_equal_to(value);
-        }
-
-        private CriteriaFactory<ItemToMatch, PropertyType> CreateFactory()
-        {
-            return new CriteriaFactory<ItemToMatch, PropertyType>(this.accessor);
+            return factory.not_equal_to(value);
         }
 
         public Criteria<ItemToMatch> greater_than_or_equal_to(PropertyType start)
