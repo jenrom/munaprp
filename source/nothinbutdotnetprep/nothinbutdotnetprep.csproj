@@ -85,6 +85,9 @@
     <Compile Include="infrastructure\ranges\RangeWithNoUpperBound.cs" />
     <Compile Include="infrastructure\sorting\AnonymousComparer.cs" />
     <Compile Include="infrastructure\sorting\ChainedComparer.cs" />
+    <Compile Include="infrastructure\sorting\ComparerBuilder.cs" />
+    <Compile Include="infrastructure\sorting\EmptyComparer.cs" />
+    <Compile Include="infrastructure\sorting\FixedOrderComparer.cs" />
     <Compile Include="infrastructure\sorting\ReverseComparer.cs" />
     <Compile Include="infrastructure\sorting\Sort.cs" />
   </ItemGroup>
