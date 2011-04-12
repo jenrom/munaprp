@@ -77,6 +77,7 @@
     <Compile Include="infrastructure\filtering\FallsInRange.cs" />
     <Compile Include="infrastructure\filtering\ICreateSpecifications.cs" />
     <Compile Include="infrastructure\filtering\NegatingCriteria.cs" />
+    <Compile Include="infrastructure\filtering\NegatingCriteriaFactory.cs" />
     <Compile Include="infrastructure\filtering\OrCriteria.cs" />
     <Compile Include="infrastructure\filtering\PropertyAccessor.cs" />
     <Compile Include="infrastructure\filtering\PropertyCriteria.cs" />
