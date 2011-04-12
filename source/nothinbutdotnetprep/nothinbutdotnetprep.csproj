@@ -66,7 +66,6 @@
     <Compile Include="collections\MovieLibrary.cs" />
     <Compile Include="collections\ProductionStudio.cs" />
     <Compile Include="infrastructure\filtering\AndCriteria.cs" />
-    <Compile Include="infrastructure\filtering\AnonymousCriteria.cs" />
     <Compile Include="infrastructure\filtering\Condition.cs" />
     <Compile Include="infrastructure\filtering\Criteria.cs" />
     <Compile Include="infrastructure\filtering\CriteriaExtensions.cs" />
