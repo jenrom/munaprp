@@ -328,14 +328,14 @@ namespace nothinbutdotnetprep.specs
                 //Dreamworks
                 //Universal
                 //Disney
-                var comparer = Sort<Movie>.by(x => x.production_studio,
-                                              ProductionStudio.MGM,
-                                              ProductionStudio.Pixar,
-                                              ProductionStudio.Dreamworks,
-                                              ProductionStudio.Universal,
-                                              ProductionStudio.Disney,
-                                              ProductionStudio.Paramount)
-                                            .then_by(x => x.date_published);
+                ComparerBuilder<Movie> comparerBuilder = Sort<Movie>.by(x => x.production_studio,
+                                                                 ProductionStudio.MGM,
+                                                                 ProductionStudio.Pixar,
+                                                                 ProductionStudio.Dreamworks,
+                                                                 ProductionStudio.Universal,
+                                                                 ProductionStudio.Disney,
+                                                                 ProductionStudio.Paramount);
+                var comparer = comparerBuilder.then_by(x => x.date_published);
 
                 var results = sut.all_movies().sort_using(comparer);
                 /* should return a set of results 
