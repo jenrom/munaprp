@@ -231,7 +231,10 @@ namespace nothinbutdotnetprep.specs
 
             It should_be_able_to_find_all_movies_published_after_a_certain_year = () =>
             {
-                var criteria =
+
+                RangeOf<int>.starting_at(1).ending_at(10).exclude_boundaries();
+
+                 var criteria =
                     Where<Movie>.has_a(x => x.date_published.Year)
                         .greater_than(2004);
 
