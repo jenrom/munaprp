@@ -83,6 +83,10 @@
     <Compile Include="infrastructure\ranges\Range.cs" />
     <Compile Include="infrastructure\ranges\RangeWithNoLowerBound.cs" />
     <Compile Include="infrastructure\ranges\RangeWithNoUpperBound.cs" />
+    <Compile Include="infrastructure\sorting\AnonymousComparer.cs" />
+    <Compile Include="infrastructure\sorting\ChainedComparer.cs" />
+    <Compile Include="infrastructure\sorting\ReverseComparer.cs" />
+    <Compile Include="infrastructure\sorting\Sort.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

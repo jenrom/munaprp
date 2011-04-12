@@ -10,6 +10,14 @@ namespace nothinbutdotnetprep.infrastructure
             foreach (var item in items) yield return item;
         }
 
+        public static IEnumerable<T> sort_using<T>(this IEnumerable<T> items,
+                                                   IComparer<T> comparer)
+        {
+            var sorted = new List<T> (items);
+            sorted.Sort(comparer);
+            return sorted;
+        }
+
         public static IEnumerable<ItemToMatch> all_items_matching<ItemToMatch>(this IEnumerable<ItemToMatch> items,
                                                                                Criteria<ItemToMatch> criteria)
         {
