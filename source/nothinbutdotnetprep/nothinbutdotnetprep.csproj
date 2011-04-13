@@ -77,16 +77,19 @@
     <Compile Include="infrastructure\filtering\NegatingCriteria.cs" />
     <Compile Include="infrastructure\filtering\NegatingExtensionPoint.cs" />
     <Compile Include="infrastructure\filtering\OrCriteria.cs" />
-    <Compile Include="infrastructure\filtering\PropertyAccessor.cs" />
     <Compile Include="infrastructure\filtering\PropertyCriteria.cs" />
     <Compile Include="infrastructure\filtering\Where.cs" />
+    <Compile Include="infrastructure\PropertyAccessor.cs" />
     <Compile Include="infrastructure\ranges\Range.cs" />
     <Compile Include="infrastructure\ranges\RangeWithNoLowerBound.cs" />
     <Compile Include="infrastructure\ranges\RangeWithNoUpperBound.cs" />
     <Compile Include="infrastructure\sorting\AnonymousComparer.cs" />
     <Compile Include="infrastructure\sorting\ChainedComparer.cs" />
+    <Compile Include="infrastructure\sorting\ComparableComparer.cs" />
     <Compile Include="infrastructure\sorting\ComparerBuilder.cs" />
+    <Compile Include="infrastructure\sorting\EmptyComparer.cs" />
     <Compile Include="infrastructure\sorting\FixedOrderComparer.cs" />
+    <Compile Include="infrastructure\sorting\PropertyComparer.cs" />
     <Compile Include="infrastructure\sorting\ReverseComparer.cs" />
     <Compile Include="infrastructure\sorting\Sort.cs" />
   </ItemGroup>

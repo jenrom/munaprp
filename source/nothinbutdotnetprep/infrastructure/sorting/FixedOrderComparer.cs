@@ -1,23 +1,19 @@
 ﻿using System.Collections.Generic;
 
-using nothinbutdotnetprep.infrastructure.filtering;
-
 namespace nothinbutdotnetprep.infrastructure.sorting
 {
-    public class FixedOrderComparer<ItemToSort, PropertyType> : IComparer<ItemToSort>
+    public class FixedOrderComparer<T> : IComparer<T>
     {
-        private readonly PropertyAccessor<ItemToSort, PropertyType> accessor;
-        private readonly List<PropertyType> fixedOrder;
+        readonly IList<T> fixedOrder;
 
-        public FixedOrderComparer(PropertyAccessor<ItemToSort, PropertyType> accessor, params PropertyType[] fixed_order)
+        public FixedOrderComparer(params T[] fixed_order)
         {
-            this.accessor = accessor;
-            this.fixedOrder = new List<PropertyType>(fixed_order);
+            this.fixedOrder = new List<T>(fixed_order);
         }
 
-        public int Compare(ItemToSort x, ItemToSort y)
+        public int Compare(T x, T y)
         {
-            return fixedOrder.IndexOf(accessor(x)).CompareTo(fixedOrder.IndexOf(accessor(y)));
+            return fixedOrder.IndexOf(x).CompareTo(fixedOrder.IndexOf(y));
         }
     }
 }

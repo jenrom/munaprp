@@ -10,7 +10,7 @@ namespace nothinbutdotnetprep.infrastructure.sorting
         {
             return new ComparerBuilder<ItemToSort>().then_by(accessor, values);
         }
-
+        
         public static ComparerBuilder<ItemToSort> by_descending<PropertyType>(PropertyAccessor<ItemToSort, PropertyType> accessor)
             where PropertyType : IComparable<PropertyType>
         {
