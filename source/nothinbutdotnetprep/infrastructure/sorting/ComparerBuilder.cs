@@ -26,31 +26,42 @@ namespace nothinbutdotnetprep.infrastructure.sorting
         public ComparerBuilder<ItemToSort> then_by<PropertyType>(PropertyAccessor<ItemToSort, PropertyType> accessor,
                                                                  params PropertyType[] fixed_order)
         {
-            return new ComparerBuilder<ItemToSort>(this.comparer, new FixedOrderComparer<ItemToSort, PropertyType>(accessor, fixed_order));
+            return create_comparer_builder(this.comparer, create_fixed_order_comparer(accessor, fixed_order));
         }
 
         public ComparerBuilder<ItemToSort> then_by<PropertyType>(PropertyAccessor<ItemToSort, PropertyType> accessor)
             where PropertyType : IComparable<PropertyType>
         {
-            return new ComparerBuilder<ItemToSort>(this.comparer, this.create_anonymous_comparer(accessor));
+            return create_comparer_builder(this.comparer, create_anonymous_comparer(accessor));
         }
 
         public ComparerBuilder<ItemToSort> then_by_descending<PropertyType>(PropertyAccessor<ItemToSort, PropertyType> accessor)
             where PropertyType : IComparable<PropertyType>
         {
-            return new ComparerBuilder<ItemToSort>(this.comparer, this.create_reverse_comparer(accessor));
+            return create_comparer_builder(this.comparer, create_reverse_comparer(accessor));
         }
 
-        private IComparer<ItemToSort> create_anonymous_comparer<PropertyType>(PropertyAccessor<ItemToSort, PropertyType> accessor)
+        private static ComparerBuilder<ItemToSort> create_comparer_builder(IComparer<ItemToSort> currentComparer, IComparer<ItemToSort> newComparer)
+        {
+            return new ComparerBuilder<ItemToSort>(currentComparer, newComparer);
+        }
+
+        private static IComparer<ItemToSort> create_fixed_order_comparer<PropertyType>(PropertyAccessor<ItemToSort, PropertyType> accessor,
+                                                                                params PropertyType[] fixed_order)
+        {
+            return new FixedOrderComparer<ItemToSort, PropertyType>(accessor, fixed_order);
+        }
+
+        private static IComparer<ItemToSort> create_anonymous_comparer<PropertyType>(PropertyAccessor<ItemToSort, PropertyType> accessor)
             where PropertyType : IComparable<PropertyType>
         {
             return new AnonymousComparer<ItemToSort>((x, y) => accessor(x).CompareTo(accessor(y)));
         }
 
-        private IComparer<ItemToSort> create_reverse_comparer<PropertyType>(PropertyAccessor<ItemToSort, PropertyType> accessor)
+        private static IComparer<ItemToSort> create_reverse_comparer<PropertyType>(PropertyAccessor<ItemToSort, PropertyType> accessor)
             where PropertyType : IComparable<PropertyType>
         {
-            return new ReverseComparer<ItemToSort>(this.create_anonymous_comparer(accessor));
+            return new ReverseComparer<ItemToSort>(create_anonymous_comparer(accessor));
         }
     }
 }
