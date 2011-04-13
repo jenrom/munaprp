@@ -20,7 +20,7 @@ namespace nothinbutdotnetprep.infrastructure.sorting
 
         public int Compare(ItemToSort x, ItemToSort y)
         {
-            return this.comparer.Compare(x, y);
+            return this.comparer != null ? this.comparer.Compare(x, y) : 0;
         }
 
         public ComparerBuilder<ItemToSort> then_by<PropertyType>(PropertyAccessor<ItemToSort, PropertyType> accessor,
