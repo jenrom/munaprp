@@ -16,11 +16,6 @@ namespace nothinbutdotnetprep.infrastructure.sorting
             this.comparer = comparer;
         }
 
-        public int Compare(ItemToSort x, ItemToSort y)
-        {
-            return this.comparer.Compare(x, y);
-        }
-
         public SortedEnumerable<ItemToSort> then_by<PropertyType>(PropertyAccessor<ItemToSort, PropertyType> accessor,
                                                                  params PropertyType[] fixed_order)
         {
